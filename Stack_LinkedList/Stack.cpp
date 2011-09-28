@@ -49,10 +49,10 @@ void* Stack::Pop()
 		top = 0;
 	}
 	else{
-		data = list->GetLinkedListData(top-1);
-		list->RemoveLinkedList(top-1);
 		top--;
 		stack_size--;
+		data = list->GetLinkedListData(top);
+		list->RemoveLinkedList(top);
 		return data;
 	}
 }
@@ -92,10 +92,13 @@ int main()
 	stack.Pop();
 	stack.ShowAllData();
 
+	//Push
 	stack.Push(str3);
 	stack.ShowAllData();
 
+	//Pop
 	stack.Pop();
+	//Push
 	stack.Push(str4);
 	stack.Push(str5);
 	//Pop
