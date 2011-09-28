@@ -7,6 +7,7 @@
 
 #include <iostream>
 #include "linkedlist.h"
+#include "StringClass.h"
 
 using namespace std;
 
@@ -134,15 +135,18 @@ void LinkedList<T>::AddLinkedList(T data)
 template <typename T>
 void LinkedList<T>::RemoveLinkedList(int position)
 {
-	if(position < 0 || position > list_size)
+	int list_cnt = GetLinkedListSize();
+	Node<T>* tempNode = GetHead();
+
+	if(position < 0 || position > list_cnt)
 		cout << "Invalid Value" << endl;
 
-	Node<T>* tempNode = GetHead();
-	for(int i=0; i<list_size; i++)
+	for(int i=0; i<list_cnt; i++)
 	{
 		if(i == position){
-			if(i == 0)
+			if(i == 0){
 				SetHead(tempNode->GetNext());
+			}
 			else{
 				tempNode->GetPrev()->SetNext(tempNode->GetNext());
 			}
@@ -162,9 +166,10 @@ void LinkedList<T>::RemoveLinkedList(int position)
 template <typename T>
 void LinkedList<T>::RemoveAllLinkedList(void)
 {
-	for(int i=0; i<list_size; i++)
+	int list_cnt = GetLinkedListSize();
+	for(int i=0; i<list_cnt; i++)
 	{
-		RemoveLinkedList(i);
+		RemoveLinkedList(0);
 	}
 	list_size=0;
 }
@@ -235,6 +240,11 @@ int main()
 
 	list_int.AddLinkedList(10);
 	cout << list_int.GetLinkedListData(0) << endl;
+
+	LinkedList<StringClass> list_string;
+	StringClass cStr = "cStr1";
+	list_string.AddLinkedList(cStr);
+	cout << list_string.GetLinkedListData(0) << endl;
 
 	return 0;
 }
