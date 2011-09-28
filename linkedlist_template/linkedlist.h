@@ -14,15 +14,15 @@ class Node
 private:
 	Node* prev;
 	Node* next;
-	T* data;
+	T data;
 public:
 	Node();
 	~Node();
-	Node(T* data);
-	void SetData(T* data);
+	Node(T data);
+	void SetData(T data);
 	void SetPrev(Node* nd);
 	void SetNext(Node* nd);
-	T* GetData();
+	T GetData();
 	Node* GetPrev();
 	Node* GetNext();
 };
@@ -45,12 +45,12 @@ private:
 public:
 	LinkedList();
 	~LinkedList();
-	void AddLinkedList(T* data);
+	void AddLinkedList(T data);
 	void RemoveLinkedList(int position);
 	void RemoveAllLinkedList(void);
 	int GetLinkedListSize(void);
 	Node<T>* GetLinkedList(int position);
-	T* GetLinkedListData(int position);
+	T GetLinkedListData(int position);
 	void ShowAllData();
 };
 

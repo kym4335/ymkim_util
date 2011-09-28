@@ -25,7 +25,7 @@ Node<T>::~Node()
 }
 
 template <typename T>
-Node<T>::Node(T* data)
+Node<T>::Node(T data)
 {
 	SetPrev(NULL);
 	SetNext(NULL);
@@ -33,7 +33,7 @@ Node<T>::Node(T* data)
 }
 
 template <typename T>
-void Node<T>::SetData(T* data)
+void Node<T>::SetData(T data)
 {
 	this->data = data;
 }
@@ -51,7 +51,7 @@ void Node<T>::SetNext(Node<T>* nd)
 }
 
 template <typename T>
-T* Node<T>::GetData()
+T Node<T>::GetData()
 {
 	return this->data;
 }
@@ -114,7 +114,7 @@ int LinkedList<T>::GetLastIndex()
 }
 
 template <typename T>
-void LinkedList<T>::AddLinkedList(T* data)
+void LinkedList<T>::AddLinkedList(T data)
 {
 	Node<T>* nd = new Node<T>(data);
 
@@ -176,7 +176,7 @@ int LinkedList<T>::GetLinkedListSize(void)
 }
 
 template <typename T>
-T* LinkedList<T>::GetLinkedListData(int position)
+T LinkedList<T>::GetLinkedListData(int position)
 {
 	return GetLinkedList(position)->GetData();
 }
@@ -219,7 +219,7 @@ void LinkedList<T>::ShowAllData()
 
 int main()
 {
-	LinkedList<char> list;
+	LinkedList<char*> list;
 
 	char* str = "Kim young min";
 
@@ -230,6 +230,11 @@ int main()
 
 //	LinkedList<int> list_int;
 //	list_int.AddLinkedList(10);
+
+	LinkedList<int> list_int;
+
+	list_int.AddLinkedList(10);
+	cout << list_int.GetLinkedListData(0) << endl;
 
 	return 0;
 }
