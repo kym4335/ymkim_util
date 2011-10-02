@@ -82,11 +82,6 @@ void LinkedList::SetTail(Node* nd)
 	this->tail = nd;
 }
 
-int LinkedList::GetLastIndex()
-{
-	return GetLinkedListSize()-1;
-}
-
 Node* LinkedList::GetHead()
 {
 	return this->head;
@@ -95,6 +90,11 @@ Node* LinkedList::GetHead()
 Node* LinkedList::GetTail()
 {
 	return this->tail;
+}
+
+int LinkedList::GetLastIndex()
+{
+	return GetLinkedListSize()-1;
 }
 
 void LinkedList::AddLinkedList(void* data)
@@ -116,15 +116,16 @@ void LinkedList::AddLinkedList(void* data)
 
 void LinkedList::RemoveLinkedList(int position)
 {
-	if(position < 0 || position > list_size)
-		cout << "Invalid Value" << endl;
-
+	int list_cnt = GetLinkedListSize();
 	Node* tempNode = GetHead();
-	for(int i=0; i<list_size; i++)
+	if(position < 0 || position > list_cnt)
+		cout << "Invalid Value" << endl;
+	for(int i=0; i<list_cnt; i++)
 	{
 		if(i == position){
-			if(i == 0)
+			if(i == 0){
 				SetHead(tempNode->GetNext());
+			}
 			else{
 				tempNode->GetPrev()->SetNext(tempNode->GetNext());
 			}
@@ -143,9 +144,10 @@ void LinkedList::RemoveLinkedList(int position)
 
 void LinkedList::RemoveAllLinkedList(void)
 {
-	for(int i=0; i<list_size; i++)
+	int list_cnt = GetLinkedListSize();
+	for(int i=0; i<list_cnt; i++)
 	{
-		RemoveLinkedList(i);
+		RemoveLinkedList(0);
 	}
 	list_size=0;
 }
@@ -184,36 +186,34 @@ void LinkedList::ShowAllData()
 
 	int i=0;
 	Node* tempNode = GetHead();
-//	for(int i=0; i<GetLinkedListSize(); i++)
 	while(tempNode)
 	{
 		cout << "Data[" << i << "] = " << (char*)tempNode->GetData() << endl;
 		i++;
 		tempNode = tempNode->GetNext();
 	}
-	cout << "=========================" << endl;
+	cout << "=========================" << endl << endl;
 }
 
 int main()
 {
-	LinkedList list;
+	LinkedList* list = new LinkedList;
 
 	char* str1 = "str1";
 	char* str2 = "str2";
 	char* str3 = "str3";
 
+	list->AddLinkedList(str1);
+	list->ShowAllData();
+	list->AddLinkedList(str2);
+	list->ShowAllData();
+	list->RemoveLinkedList(list->GetLinkedListSize()-1);
+	list->ShowAllData();
 
-	list.AddLinkedList(str1);
-	list.ShowAllData();
-	list.AddLinkedList(str2);
-	list.ShowAllData();
-	list.RemoveLinkedList(list.GetLinkedListSize()-1);
-	list.ShowAllData();
-	list.AddLinkedList(str2);
-	list.ShowAllData();
-//	char* str1 = (char*)list.GetLinkedListData(0);
-//	cout << str1 << endl;
+	list->AddLinkedList(str2);
+	list->ShowAllData();
 
+	delete list;
 	return 0;
 }
 
