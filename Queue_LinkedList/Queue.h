@@ -28,6 +28,5 @@ public:
 	void ShowAllData();
 };
 
-/* modified for git-test */
 
 #endif /* QUEUE_H_ */
